@@ -51,7 +51,7 @@ class AppTheme {
           height: 1.45,
         ),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
