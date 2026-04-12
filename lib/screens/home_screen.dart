@@ -20,10 +20,10 @@ class HomeScreen extends StatelessWidget {
         children: [
           Text('Hello, ${user.name}', style: theme.textTheme.bodyLarge),
           const SizedBox(height: 6),
-          Text('Готовые уроки', style: theme.textTheme.headlineLarge),
+          Text('Lesson Folders', style: theme.textTheme.headlineLarge),
           const SizedBox(height: 10),
           Text(
-            'Выберите один из трех подготовленных тестов и заработайте очки за правильные ответы.',
+            'The main page now contains Listening, Writing, and Reading based on your prepared tasks.',
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 20),
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Ваш прогресс',
+                        'Your progress',
                         style: TextStyle(
                           color: Colors.white70,
                           fontWeight: FontWeight.w700,
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        '${user.points} очков',
+                        '${user.points} points',
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -111,9 +111,7 @@ class _LessonCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(22),
                 ),
                 child: Icon(
-                  lesson.type == LessonType.video
-                      ? Icons.play_circle_fill_rounded
-                      : Icons.menu_book_rounded,
+                  _resolveIcon(lesson),
                   size: 36,
                   color: accent,
                 ),
@@ -144,9 +142,13 @@ class _LessonCard extends StatelessWidget {
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        _Tag(label: '10 вопросов', color: accent),
+                        _Tag(label: '${lesson.questions.length} questions', color: accent),
                         _Tag(
-                          label: isCompleted ? 'Пройдено' : 'Готов к старту',
+                          label: '${lesson.sections.length} sections',
+                          color: const Color(0xFF615D58),
+                        ),
+                        _Tag(
+                          label: isCompleted ? 'Completed' : 'Ready to open',
                           color: isCompleted
                               ? const Color(0xFF46C071)
                               : const Color(0xFF1F7AFC),
@@ -161,6 +163,16 @@ class _LessonCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  IconData _resolveIcon(LessonContent lesson) {
+    if (lesson.title == 'Listening') {
+      return Icons.headphones_rounded;
+    }
+    if (lesson.title == 'Writing') {
+      return Icons.edit_note_rounded;
+    }
+    return Icons.menu_book_rounded;
   }
 }
 

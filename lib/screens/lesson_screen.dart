@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
 import '../models/lesson_content.dart';
 import '../widgets/app_scope.dart';
@@ -112,74 +113,40 @@ class _LessonFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final question = lesson.questions[currentQuestion];
-    final isIntro = currentQuestion == 0;
 
     return ListView(
       key: ValueKey('lesson-${lesson.id}-$currentQuestion'),
       padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
       children: [
+        lesson.type == LessonType.video
+            ? _VideoLessonCard(lesson: lesson, accent: accent)
+            : _ReadingLessonCard(lesson: lesson, accent: accent),
+        const SizedBox(height: 20),
         Container(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(18),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [accent, accent.withOpacity(0.72)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(32),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                lesson.type == LessonType.video ? 'Video lesson' : 'Reading lesson',
-                style: const TextStyle(
-                  color: Colors.white70,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                lesson.contentTitle,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                lesson.contentBody,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  height: 1.45,
-                ),
-              ),
-            ],
+          child: const Text(
+            'Review the lesson sections below, then answer 10 quiz questions. Each correct answer gives 1 point.',
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF3F3A35),
+              height: 1.4,
+            ),
           ),
         ),
-        const SizedBox(height: 20),
-        if (isIntro)
-          Container(
-            padding: const EdgeInsets.all(18),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: const Text(
-              'Сначала ученик знакомится с материалом выше, затем отвечает на 10 вопросов. За каждый правильный ответ начисляется 1 очко.',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF3F3A35),
-                height: 1.4,
-              ),
-            ),
+        const SizedBox(height: 16),
+        ...lesson.sections.map(
+          (section) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _LessonSectionCard(section: section, accent: accent),
           ),
-        const SizedBox(height: 20),
+        ),
+        const SizedBox(height: 12),
         Text(
-          'Вопрос ${currentQuestion + 1} из ${lesson.questions.length}',
+          'Question ${currentQuestion + 1} of ${lesson.questions.length}',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w800,
@@ -230,9 +197,309 @@ class _LessonFlow extends StatelessWidget {
           onPressed: selectedAnswer == null ? null : onNext,
           child: Text(
             currentQuestion == lesson.questions.length - 1
-                ? 'Завершить тест'
-                : 'Следующий вопрос',
+                ? 'Finish quiz'
+                : 'Next question',
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LessonSectionCard extends StatelessWidget {
+  const _LessonSectionCard({
+    required this.section,
+    required this.accent,
+  });
+
+  final LessonSection section;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: accent.withOpacity(0.18)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            section.title,
+            style: TextStyle(
+              color: accent,
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            section.body,
+            style: const TextStyle(
+              fontSize: 15,
+              height: 1.45,
+              color: Color(0xFF3F3A35),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadingLessonCard extends StatelessWidget {
+  const _ReadingLessonCard({
+    required this.lesson,
+    required this.accent,
+  });
+
+  final LessonContent lesson;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [accent, accent.withOpacity(0.72)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            lesson.title,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            lesson.contentTitle,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            lesson.contentBody,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              height: 1.45,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _VideoLessonCard extends StatelessWidget {
+  const _VideoLessonCard({
+    required this.lesson,
+    required this.accent,
+  });
+
+  final LessonContent lesson;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            lesson.contentTitle,
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w900,
+              color: Color(0xFF1C1A1A),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            lesson.contentBody,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF615D58),
+              height: 1.45,
+            ),
+          ),
+          const SizedBox(height: 16),
+          _AssetVideoPlayer(
+            videoAsset: lesson.videoAsset,
+            accent: accent,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AssetVideoPlayer extends StatefulWidget {
+  const _AssetVideoPlayer({
+    required this.videoAsset,
+    required this.accent,
+  });
+
+  final String? videoAsset;
+  final Color accent;
+
+  @override
+  State<_AssetVideoPlayer> createState() => _AssetVideoPlayerState();
+}
+
+class _AssetVideoPlayerState extends State<_AssetVideoPlayer> {
+  VideoPlayerController? _controller;
+  bool _failed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initVideo();
+  }
+
+  Future<void> _initVideo() async {
+    final asset = widget.videoAsset;
+    if (asset == null || asset.isEmpty) {
+      setState(() {
+        _failed = true;
+      });
+      return;
+    }
+
+    final controller = VideoPlayerController.asset(asset);
+    try {
+      await controller.initialize();
+      await controller.setLooping(false);
+      if (!mounted) {
+        await controller.dispose();
+        return;
+      }
+      setState(() {
+        _controller = controller;
+      });
+    } catch (_) {
+      await controller.dispose();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _failed = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_failed) {
+      return Container(
+        height: 220,
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: widget.accent.withOpacity(0.10),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.video_library_rounded, size: 40),
+            SizedBox(height: 12),
+            Text(
+              'Audio or video file is not added yet.',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Put the lesson file into assets/videos and run flutter pub get.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF615D58),
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final controller = _controller;
+    if (controller == null || !controller.value.isInitialized) {
+      return Container(
+        height: 220,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: widget.accent.withOpacity(0.10),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: CircularProgressIndicator(color: widget.accent),
+      );
+    }
+
+    return Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: VideoPlayer(controller),
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: () async {
+                  if (controller.value.isPlaying) {
+                    await controller.pause();
+                  } else {
+                    await controller.play();
+                  }
+                  if (mounted) {
+                    setState(() {});
+                  }
+                },
+                icon: Icon(
+                  controller.value.isPlaying
+                      ? Icons.pause_rounded
+                      : Icons.play_arrow_rounded,
+                ),
+                label: Text(
+                  controller.value.isPlaying ? 'Pause' : 'Play lesson media',
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -272,7 +539,7 @@ class _LessonResult extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             const Text(
-              'Тест завершен',
+              'Quiz completed',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w900,
@@ -280,7 +547,7 @@ class _LessonResult extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              'Правильных ответов: $score из 10',
+              'Correct answers: $score of ${lesson.questions.length}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -289,8 +556,8 @@ class _LessonResult extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               isAlreadyCompleted
-                  ? 'Этот урок уже был пройден раньше, поэтому очки повторно не добавляются.'
-                  : 'В банк зачислено $score очков.',
+                  ? 'This lesson was already completed before, so points were not added again.'
+                  : '$score points were added to the bank.',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 15,
@@ -302,7 +569,7 @@ class _LessonResult extends StatelessWidget {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Вернуться на главную'),
+              child: const Text('Back to home'),
             ),
           ],
         ),
