@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/user_profile.dart';
 import '../widgets/app_scope.dart';
 import 'auth_screen.dart';
 
@@ -18,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Профиль',
+              'Profile',
               style: TextStyle(
                 fontSize: 34,
                 fontWeight: FontWeight.w900,
@@ -59,12 +60,17 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    'Пройдено уроков: ${user.completedLessons.length}',
+                    'Role: ${user.role.label}',
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Очки: ${user.points}',
+                    'Submitted folders: ${user.submittedFolders.length}',
+                    style: const TextStyle(fontWeight: FontWeight.w800),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Points: ${user.points}',
                     style: const TextStyle(fontWeight: FontWeight.w800),
                   ),
                 ],
@@ -90,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               child: const Text(
-                'Выйти из аккаунта',
+                'Sign out',
                 style: TextStyle(
                   color: Color(0xFF1C1A1A),
                   fontWeight: FontWeight.w800,

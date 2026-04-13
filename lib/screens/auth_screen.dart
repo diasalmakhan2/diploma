@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/user_profile.dart';
 import '../widgets/app_scope.dart';
 import 'home_shell.dart';
 
@@ -19,6 +20,7 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isLogin = false;
   bool _isSubmitting = false;
   String? _errorText;
+  UserRole _selectedRole = UserRole.student;
 
   @override
   void dispose() {
@@ -47,6 +49,7 @@ class _AuthScreenState extends State<AuthScreen> {
             name: _nameController.text,
             email: _emailController.text,
             password: _passwordController.text,
+            role: _selectedRole,
           );
 
     if (!mounted) {
@@ -85,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         padding: const EdgeInsets.all(24),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
-                            colors: [Color(0xFF46C071), Color(0xFFFFB534)],
+                            colors: [Color(0xFF46C071), Color(0xFF1F7AFC)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -104,7 +107,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                             SizedBox(height: 12),
                             Text(
-                              'Английский для школьников: урок, тест и очки в одном приложении.',
+                              'English folders, step-by-step tasks, student submissions, and teacher review in one app.',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -117,17 +120,44 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        _isLogin ? 'Вход в аккаунт' : 'Создание аккаунта',
+                        _isLogin ? 'Sign in' : 'Create an account',
                         style: theme.textTheme.headlineMedium,
                       ),
                       const SizedBox(height: 8),
                       Text(
                         _isLogin
-                            ? 'Войдите, чтобы продолжить уроки и увидеть свои баллы.'
-                            : 'Зарегистрируйтесь и начните проходить готовые тесты.',
+                            ? 'Enter your account details to open your dashboard.'
+                            : 'Choose a role and create a new account.',
                         style: theme.textTheme.bodyLarge,
                       ),
                       const SizedBox(height: 24),
+                      if (!_isLogin) ...[
+                        const Text(
+                          'Role',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: UserRole.values.map((role) {
+                            final selected = _selectedRole == role;
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: ChoiceChip(
+                                label: Text(role.label),
+                                selected: selected,
+                                onSelected: (_) {
+                                  setState(() {
+                                    _selectedRole = role;
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                       Form(
                         key: _formKey,
                         child: Column(
@@ -136,12 +166,12 @@ class _AuthScreenState extends State<AuthScreen> {
                               TextFormField(
                                 controller: _nameController,
                                 decoration: const InputDecoration(
-                                  labelText: 'Имя',
+                                  labelText: 'Full name',
                                 ),
                                 validator: (value) {
                                   if (!_isLogin &&
                                       (value == null || value.trim().length < 2)) {
-                                    return 'Введите имя.';
+                                    return 'Enter your name.';
                                   }
                                   return null;
                                 },
@@ -156,7 +186,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                               validator: (value) {
                                 if (value == null || !value.contains('@')) {
-                                  return 'Введите корректный email.';
+                                  return 'Enter a valid email.';
                                 }
                                 return null;
                               },
@@ -166,11 +196,11 @@ class _AuthScreenState extends State<AuthScreen> {
                               controller: _passwordController,
                               obscureText: true,
                               decoration: const InputDecoration(
-                                labelText: 'Пароль',
+                                labelText: 'Password',
                               ),
                               validator: (value) {
                                 if (value == null || value.length < 4) {
-                                  return 'Минимум 4 символа.';
+                                  return 'Use at least 4 characters.';
                                 }
                                 return null;
                               },
@@ -194,7 +224,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               ElevatedButton(
                 onPressed: _isSubmitting ? null : _submit,
-                child: Text(_isLogin ? 'Войти' : 'Зарегистрироваться'),
+                child: Text(_isLogin ? 'Sign in' : 'Create account'),
               ),
               const SizedBox(height: 12),
               TextButton(
@@ -208,8 +238,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                 child: Text(
                   _isLogin
-                      ? 'Нет аккаунта? Создать'
-                      : 'Уже есть аккаунт? Войти',
+                      ? 'Need an account? Create one'
+                      : 'Already have an account? Sign in',
                 ),
               ),
             ],

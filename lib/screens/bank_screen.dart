@@ -14,7 +14,7 @@ class BankScreen extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
         children: [
           const Text(
-            'My Bank',
+            'Points',
             style: TextStyle(
               fontSize: 34,
               fontWeight: FontWeight.w900,
@@ -22,7 +22,7 @@ class BankScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Здесь отображаются баллы, заработанные за правильные ответы.',
+            'Automatic quiz points and teacher review points are collected here.',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -44,7 +44,7 @@ class BankScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Всего очков',
+                  'Total points',
                   style: TextStyle(
                     color: Colors.white70,
                     fontWeight: FontWeight.w700,
@@ -62,10 +62,11 @@ class BankScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  '1 правильный ответ = 1 очко',
+                  'Multiple-choice and fill-in-the-blank tasks score automatically. Open answers are graded by the teacher.',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
+                    height: 1.4,
                   ),
                 ),
               ],
@@ -79,7 +80,7 @@ class BankScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(24),
             ),
             child: const Text(
-              'В этой дипломной версии очки накапливаются как внутренняя мотивация. Позже сюда можно добавить магазин, достижения или обмен монет на бонусы.',
+              'Teacher-reviewed questions can add up to 5 points per open answer. Once the teacher resolves a submission, the new points appear here automatically.',
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,

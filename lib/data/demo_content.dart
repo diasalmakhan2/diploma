@@ -1,428 +1,687 @@
 import '../models/lesson_content.dart';
-import '../models/quiz_question.dart';
 
 const lessons = <LessonContent>[
   LessonContent(
-    id: 'listening_night_animals',
+    id: 'listening',
     title: 'Listening',
     subtitle: 'Night Animals Song',
-    type: LessonType.video,
+    description:
+        'Listen to the song, answer quiz questions, complete the missing lyrics, and share your opinion.',
     accentColor: 0xFF1F7AFC,
-    contentTitle: 'Listen, guess, and complete the lyrics',
-    contentBody:
-        'This lesson is based on the song about owl, raccoon, and wolf. '
-        'Students first predict the topic, then choose the main idea, fill in '
-        'missing words, and share their opinion.',
-    videoAsset: 'assets/videos/night_animals.mp4',
-    sections: [
-      LessonSection(
-        title: 'Pre-listening',
-        body:
-            'Choose the correct answer.\n'
-            '1. What animals might be active at night?\n'
-            'A) Lion, elephant, cow\n'
-            'B) Owl, raccoon, wolf\n'
-            'C) Chicken, sheep, horse\n\n'
-            '2. What does an owl usually do at night?\n'
-            'A) Sleeps in water\n'
-            'B) Hunts and looks around\n'
-            'C) Hides underground\n\n'
-            '3. What do raccoons like to eat?\n'
-            'A) Only grass\n'
-            'B) Anything they can find\n'
-            'C) Only meat\n\n'
-            '4. Wolves usually live in:\n'
-            'A) Groups (packs)\n'
-            'B) Alone in houses\n'
-            'C) Trees',
-      ),
-      LessonSection(
-        title: 'While listening',
-        body:
-            'Main idea task:\n'
-            'The song is about different night animals and what they do.\n\n'
-            'Fill in the blanks while listening again:\n'
-            'When the night gets dark, here we come\n'
-            "It's our _______\n"
-            'I am an owl with a unique neck\n'
-            'Believe it or not\n'
-            'I can turn my face _______ down\n'
-            'I look all around, underneath the _______\n'
-            'I am a raccoon with a _______\n'
-            "I eat anything I can _______\n"
-            'I live in a hole in an old _______\n'
-            'I am a wolf, a cousin to dogs\n'
-            "But I'm _______ than dogs\n"
-            'I howl to talk with my _______',
-      ),
-      LessonSection(
-        title: 'Answers',
-        body:
-            'time, upside, moon, mask, find, tree, stronger, friends',
-      ),
-      LessonSection(
-        title: 'Your opinion',
-        body:
-            'Which animal is the most interesting? Why?\n'
-            'If you were one of these animals, which would you be?',
-      ),
-      LessonSection(
-        title: 'Vocabulary',
-        body:
-            'owl - сова\n'
-            'raccoon - енот\n'
-            'wolf - волк\n'
-            'forest - лес\n'
-            'night - ночь\n'
-            'fly - летать\n'
-            'run - бегать\n'
-            'hunt - охотиться\n'
-            'strong - сильный\n'
-            'cute - милый',
-      ),
-    ],
-    questions: [
-      QuizQuestion(
-        prompt: 'What is the lesson song about?',
-        options: [
-          'Farm animals in the morning',
-          'Night animals and their behavior',
-          'Pets in a house',
-          'A zoo trip',
+    folders: [
+      LessonFolder(
+        id: 'listening_pre',
+        title: '1. Pre-listening Task',
+        subtitle: 'Choose the correct answer',
+        description:
+            'Activate background knowledge before listening to the song.',
+        media: LessonMedia(
+          type: LessonMediaType.audio,
+          title: 'Night Animals Song',
+          description: 'Play the song before or during the activities.',
+          assetPath: 'assets/audio/night_animals_song.mp3',
+          emptyStateText:
+              'Add the song file to assets/audio/night_animals_song.mp3 to enable playback.',
+        ),
+        steps: [
+          LessonStep(
+            id: 'listening_pre_intro',
+            title: 'Warm-up',
+            prompt: 'Get ready for the song.',
+            type: LessonStepType.info,
+            content: [
+              'Think about animals that wake up when it is dark.',
+              'Read each question carefully and choose one answer.',
+            ],
+          ),
+          LessonStep(
+            id: 'listening_pre_q1',
+            title: 'Question 1',
+            prompt: 'What animals might be active at night?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Lion, elephant, cow',
+              'Owl, raccoon, wolf',
+              'Chicken, sheep, horse',
+            ],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'listening_pre_q2',
+            title: 'Question 2',
+            prompt: 'What does an owl usually do at night?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Sleeps in water',
+              'Hunts and looks around',
+              'Hides underground',
+            ],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'listening_pre_q3',
+            title: 'Question 3',
+            prompt: 'What do raccoons like to eat?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Only grass',
+              'Anything they can find',
+              'Only meat',
+            ],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'listening_pre_q4',
+            title: 'Question 4',
+            prompt: 'Wolves usually live in:',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Groups (packs)',
+              'Alone in houses',
+              'Trees',
+            ],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'listening_pre_q5',
+            title: 'Question 5',
+            prompt: 'What is the main idea of the song likely about?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Farm animals in the morning',
+              'Night animals and their behavior',
+              'Pets in a home',
+            ],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'listening_pre_q6',
+            title: 'Main idea',
+            prompt: 'The song is about:',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Different night animals and what they do',
+              'A zoo during the day',
+              'Animals learning to talk like humans',
+            ],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
         ],
-        correctIndex: 1,
       ),
-      QuizQuestion(
-        prompt: 'Which animal can turn its face upside down in the song?',
-        options: ['Wolf', 'Raccoon', 'Owl', 'Elephant'],
-        correctIndex: 2,
-      ),
-      QuizQuestion(
-        prompt: 'What does the owl do at night?',
-        options: [
-          'Sleeps in water',
-          'Hunts and looks around',
-          'Hides in a box',
-          'Eats grass',
+      LessonFolder(
+        id: 'listening_lyrics',
+        title: '2. Listening Again Task',
+        subtitle: 'Fill in the blanks',
+        description:
+            'Listen again and complete the song line by line using the word bank.',
+        media: LessonMedia(
+          type: LessonMediaType.audio,
+          title: 'Night Animals Song',
+          description: 'Use the song again while completing the lyrics.',
+          assetPath: 'assets/audio/night_animals_song.mp3',
+          emptyStateText:
+              'Add the song file to assets/audio/night_animals_song.mp3 to enable playback.',
+        ),
+        steps: [
+          LessonStep(
+            id: 'listening_lyrics_intro',
+            title: 'Word bank',
+            prompt: 'Use the words from the box while listening.',
+            type: LessonStepType.info,
+            content: [
+              'Word bank: time, upside, moon, mask, find, tree, stronger, friends',
+            ],
+          ),
+          LessonStep(
+            id: 'listening_lyrics_1',
+            title: 'Blank 1',
+            prompt: 'Complete the line: It\'s our _______.',
+            type: LessonStepType.fillBlank,
+            helperLines: [
+              'When the night gets dark, here we come',
+            ],
+            acceptedAnswers: ['time'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_2',
+            title: 'Blank 2',
+            prompt: 'Complete the line: I can turn my face _______ down.',
+            type: LessonStepType.fillBlank,
+            helperLines: [
+              'I am an owl with a unique neck',
+              'Believe it or not',
+            ],
+            acceptedAnswers: ['upside'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_3',
+            title: 'Blank 3',
+            prompt: 'Complete the line: I look all around, underneath the _______.',
+            type: LessonStepType.fillBlank,
+            helperLines: [
+              'I am an owl with a unique neck',
+            ],
+            acceptedAnswers: ['moon'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_4',
+            title: 'Blank 4',
+            prompt: 'Complete the line: I am a raccoon with a _______.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['mask'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_5',
+            title: 'Blank 5',
+            prompt: 'Complete the line: I eat anything I can _______.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['find'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_6',
+            title: 'Blank 6',
+            prompt: 'Complete the line: I live in a hole in an old _______.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['tree'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_7',
+            title: 'Blank 7',
+            prompt: 'Complete the line: But I\'m _______ than dogs.',
+            type: LessonStepType.fillBlank,
+            helperLines: [
+              'I am a wolf, a cousin to dogs',
+            ],
+            acceptedAnswers: ['stronger'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'listening_lyrics_8',
+            title: 'Blank 8',
+            prompt: 'Complete the line: I howl to talk with my _______.',
+            type: LessonStepType.fillBlank,
+            helperLines: [
+              'Peek-a-boo, peek-a-boo',
+              'I am a wolf, a cousin to dogs',
+            ],
+            acceptedAnswers: ['friends'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
         ],
-        correctIndex: 1,
       ),
-      QuizQuestion(
-        prompt: 'What kind of animal is the raccoon in the lyrics?',
-        options: [
-          'It has a mask',
-          'It has wings',
-          'It lives in the ocean',
-          'It is a farm bird',
+      LessonFolder(
+        id: 'listening_opinion',
+        title: '3. Your Opinion',
+        subtitle: 'Open speaking-to-writing responses',
+        description:
+            'Write your opinion in full sentences. The teacher will review these answers.',
+        steps: [
+          LessonStep(
+            id: 'listening_opinion_intro',
+            title: 'Instructions',
+            prompt: 'Answer in your own words.',
+            type: LessonStepType.info,
+            content: [
+              'Use at least one complete sentence for each answer.',
+              'Your teacher can give up to 5 points for each response.',
+            ],
+          ),
+          LessonStep(
+            id: 'listening_opinion_q1',
+            title: 'Opinion 1',
+            prompt: 'Which animal is the most interesting? Why?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer:
+                'The owl is the most interesting because it can turn its face and hunt at night.',
+            placeholder: 'Type your opinion',
+          ),
+          LessonStep(
+            id: 'listening_opinion_q2',
+            title: 'Opinion 2',
+            prompt: 'If you were one of these animals, which would you be?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer:
+                'I would be a wolf because wolves are strong and work with their pack.',
+            placeholder: 'Type your opinion',
+          ),
         ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'What does the raccoon eat?',
-        options: [
-          'Only meat',
-          'Only grass',
-          'Anything it can find',
-          'Only fish',
-        ],
-        correctIndex: 2,
-      ),
-      QuizQuestion(
-        prompt: 'Where does the raccoon live in the song?',
-        options: [
-          'In an old tree',
-          'In a cave by the sea',
-          'In a classroom',
-          'In a nest',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'The wolf is a cousin to which animal?',
-        options: ['Cats', 'Dogs', 'Bears', 'Foxes'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'How does the wolf talk with friends?',
-        options: ['By dancing', 'By whispering', 'By howling', 'By singing'],
-        correctIndex: 2,
-      ),
-      QuizQuestion(
-        prompt: 'What word completes: "It\'s our _______"?',
-        options: ['night', 'time', 'forest', 'home'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'Which three animals appear in this listening lesson?',
-        options: [
-          'Owl, raccoon, wolf',
-          'Horse, duck, sheep',
-          'Lion, tiger, bear',
-          'Dog, cat, rabbit',
-        ],
-        correctIndex: 0,
-      ),
-    ],
-  ),
-  LessonContent(
-    id: 'writing_dream_pet',
-    title: 'Writing',
-    subtitle: 'My Dream Pet',
-    type: LessonType.text,
-    accentColor: 0xFFFF8C42,
-    contentTitle: 'Write an email to your mom',
-    contentBody:
-        'Students plan a short email about a dream pet. The task focuses on '
-        'simple sentence building, structure, and basic personal reasons.',
-    sections: [
-      LessonSection(
-        title: 'Step 1. Think',
-        body:
-            'Answer the questions:\n'
-            'What animal do you want as a pet?\n'
-            'Why do you want it?\n'
-            'Where will it live? (home / room / garden)\n'
-            'What will you feed it?',
-      ),
-      LessonSection(
-        title: 'Step 2. Write',
-        body:
-            'Use this structure:\n'
-            'Dear Mom,\n'
-            'My dream pet is ...\n'
-            'I want it because ...\n'
-            'It will live in ...\n'
-            'I will feed it ...\n'
-            'I will take care of it.\n'
-            'Bye,\n'
-            'Your son/daughter ...',
-      ),
-      LessonSection(
-        title: 'Step 3. Check',
-        body:
-            'I used "Dear Mom" and "Bye".\n'
-            'I wrote 5-6 sentences.\n'
-            'I used capital letters.\n'
-            'I checked spelling.',
-      ),
-      LessonSection(
-        title: 'Task format',
-        body:
-            'This section can later include a photo prompt (.jpg) and a writing '
-            'area for the student response.',
-      ),
-    ],
-    questions: [
-      QuizQuestion(
-        prompt: 'Who should the student write the email to?',
-        options: ['Teacher', 'Friend', 'Mom', 'Doctor'],
-        correctIndex: 2,
-      ),
-      QuizQuestion(
-        prompt: 'What is the topic of the email?',
-        options: [
-          'My school bag',
-          'My dream pet',
-          'My favorite food',
-          'My holiday',
-        ],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'Which greeting is used in the structure?',
-        options: ['Hello teacher', 'Dear Mom', 'Good afternoon', 'Hi class'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'What should the student explain after naming the pet?',
-        options: [
-          'Why they want it',
-          'How old the mom is',
-          'What time school starts',
-          'Where the zoo is',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'Which place is suggested for the pet to live?',
-        options: [
-          'Home, room, or garden',
-          'Airport only',
-          'Mountain only',
-          'River only',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'What should the student include about food?',
-        options: [
-          'What they will feed it',
-          'What the mom will cook',
-          'What the teacher likes',
-          'What the class eats',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'Which sentence belongs in the email structure?',
-        options: [
-          'I will take care of it.',
-          'I am late for school.',
-          'The zoo is very big.',
-          'My brother plays football.',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'How many sentences should the student write?',
-        options: ['1-2', '3-4', '5-6', '10-12'],
-        correctIndex: 2,
-      ),
-      QuizQuestion(
-        prompt: 'What should be checked at the end?',
-        options: [
-          'Spelling and capital letters',
-          'Bus tickets',
-          'Animal photos only',
-          'Math homework',
-        ],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'Which closing is suggested?',
-        options: ['See you at lunch', 'Bye', 'Best movie ever', 'Good night class'],
-        correctIndex: 1,
       ),
     ],
   ),
   LessonContent(
-    id: 'reading_baby_elephants',
+    id: 'reading',
     title: 'Reading',
     subtitle: 'Two Baby Elephants',
-    type: LessonType.text,
+    description:
+        'Look at the picture, predict the topic, read the text, and answer follow-up questions.',
     accentColor: 0xFF46C071,
-    contentTitle: 'Read the text and answer the questions',
-    contentBody:
-        'This reading lesson starts with a picture discussion and prediction, '
-        'then moves to a short text about two baby elephants born in a zoo in '
-        'the United Kingdom.',
-    sections: [
-      LessonSection(
-        title: 'Before reading',
-        body:
-            'Look at the picture and answer:\n'
-            'What animals can you see?\n'
-            'Where do they live? (forest, zoo, farm, ocean)\n'
-            'What are they doing?\n\n'
-            'Think and guess:\n'
-            'What do you think the text is about?\n'
-            'Is it about wild animals or pets?\n'
-            'What information will you read? (food, habitat, behavior)',
+    folders: [
+      LessonFolder(
+        id: 'reading_picture',
+        title: '1. Look and Predict',
+        subtitle: 'Picture discussion',
+        description:
+            'Study the picture first, then answer prediction questions before reading the text.',
+        media: LessonMedia(
+          type: LessonMediaType.image,
+          title: 'Picture prompt',
+          description: 'A little girl is feeding baby elephants.',
+          assetPath: 'assets/images/baby_elephants.jpg',
+          emptyStateText:
+              'Add the picture to assets/images/baby_elephants.jpg to display the reading prompt.',
+        ),
+        steps: [
+          LessonStep(
+            id: 'reading_picture_intro',
+            title: 'Look at the picture',
+            prompt: 'Observe the image carefully before answering.',
+            type: LessonStepType.info,
+            content: [
+              'Think about the animals, the place, and the action in the picture.',
+            ],
+          ),
+          LessonStep(
+            id: 'reading_picture_q1',
+            title: 'Task 1',
+            prompt: 'What animals can you see?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer: 'I can see baby elephants.',
+            placeholder: 'Type your answer',
+          ),
+          LessonStep(
+            id: 'reading_picture_q2',
+            title: 'Task 1',
+            prompt: 'Where do they live?',
+            type: LessonStepType.multipleChoice,
+            options: ['Forest', 'Zoo', 'Farm', 'Ocean'],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'reading_picture_q3',
+            title: 'Task 1',
+            prompt: 'What are they doing in the picture?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer:
+                'They are standing together and being fed by a girl.',
+            placeholder: 'Type your answer',
+          ),
+          LessonStep(
+            id: 'reading_picture_q4',
+            title: 'Task 2',
+            prompt: 'What do you think the text is about?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer:
+                'I think the text is about baby elephants at a zoo.',
+            placeholder: 'Type your prediction',
+          ),
+          LessonStep(
+            id: 'reading_picture_q5',
+            title: 'Task 2',
+            prompt: 'Is the text about wild animals or pets?',
+            type: LessonStepType.multipleChoice,
+            options: ['Wild animals', 'Pets'],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'reading_picture_q6',
+            title: 'Task 2',
+            prompt: 'What information will you probably read about?',
+            type: LessonStepType.multipleChoice,
+            options: ['Food', 'Habitat', 'Behavior', 'All of them'],
+            correctOptionIndex: 3,
+            autoPoints: 1,
+          ),
+        ],
       ),
-      LessonSection(
-        title: 'Text',
-        body:
-            'Two baby elephants have been born at a zoo in the United Kingdom. '
-            'The first baby was born last week, and the second arrived two days '
-            'later. Zoo workers say both elephants are healthy and active. '
-            'Visitors are excited to see the babies. There is a special area '
-            'where people can watch the elephants safely. The zoo hopes the '
-            'births will help the elephant population and teach people about '
-            'wildlife.',
-      ),
-      LessonSection(
-        title: 'After reading',
-        body:
-            'Choose the correct answer and complete the sentences.\n'
-            '1. How many baby elephants were born?\n'
-            '2. Where were they born?\n'
-            '3. When was the first baby elephant born?\n\n'
-            'Complete:\n'
-            'The babies are healthy and active.\n'
-            'People can watch the elephants in a special area.\n'
-            'The zoo wants to help the elephant population.',
-      ),
-      LessonSection(
-        title: 'Vocabulary',
-        body:
-            'zoo - зоопарк\n'
-            'elephant - слон\n'
-            'healthy - здоровый\n'
-            'active - активный\n'
-            'wildlife - дикая природа\n'
-            'population - популяция',
+      LessonFolder(
+        id: 'reading_text',
+        title: '2. Read and Answer',
+        subtitle: 'Text questions',
+        description:
+            'Read the short text and complete the follow-up tasks.',
+        steps: [
+          LessonStep(
+            id: 'reading_text_passage',
+            title: 'Reading text',
+            prompt: 'Read the text carefully.',
+            type: LessonStepType.info,
+            content: [
+              'Two baby elephants have been born at a zoo in the United Kingdom. The first baby was born last week, and the second arrived two days later. Zoo workers say both elephants are healthy and active. Visitors are excited to see the babies. There is a special area where people can watch the elephants safely. The zoo hopes the births will help the elephant population and teach people about wildlife.',
+            ],
+          ),
+          LessonStep(
+            id: 'reading_text_q1',
+            title: 'Question 1',
+            prompt: 'How many baby elephants were born?',
+            type: LessonStepType.multipleChoice,
+            options: ['1', '2', '3'],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'reading_text_q2',
+            title: 'Question 2',
+            prompt: 'Where were they born?',
+            type: LessonStepType.multipleChoice,
+            options: ['In Africa', 'In a UK zoo', 'In a forest'],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'reading_text_q3',
+            title: 'Question 3',
+            prompt: 'When was the first baby elephant born?',
+            type: LessonStepType.multipleChoice,
+            options: ['Last week', 'Two days later', 'Last month'],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'reading_text_fill1',
+            title: 'Complete the sentence',
+            prompt: 'The babies are healthy and ____.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['active'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+          LessonStep(
+            id: 'reading_text_fill2',
+            title: 'Complete the sentence',
+            prompt: 'People can watch the elephants in a ____.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['special area', 'a special area'],
+            autoPoints: 1,
+            placeholder: 'Type the missing words',
+          ),
+          LessonStep(
+            id: 'reading_text_fill3',
+            title: 'Complete the sentence',
+            prompt: 'The zoo wants to help the ____.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['elephant population', 'the elephant population'],
+            autoPoints: 1,
+            placeholder: 'Type the missing words',
+          ),
+        ],
       ),
     ],
-    questions: [
-      QuizQuestion(
-        prompt: 'How many baby elephants were born?',
-        options: ['1', '2', '3', '4'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'Where were the baby elephants born?',
-        options: ['In Africa', 'In a UK zoo', 'On a farm', 'In a forest'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'When was the first baby elephant born?',
-        options: ['Last week', 'Last month', 'Yesterday', 'Two years ago'],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'When did the second baby arrive?',
-        options: ['The same day', 'Two days later', 'One month later', 'At night'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'How do zoo workers describe the babies?',
-        options: [
-          'Healthy and active',
-          'Scared and quiet',
-          'Weak and sleepy',
-          'Old and tired',
+  ),
+  LessonContent(
+    id: 'writing',
+    title: 'Writing',
+    subtitle: 'My Dream Pet',
+    description:
+        'Plan an email, write it, and review your work before submitting it to the teacher.',
+    accentColor: 0xFFFF8C42,
+    folders: [
+      LessonFolder(
+        id: 'writing_plan',
+        title: '1. Plan Your Ideas',
+        subtitle: 'Step 1: Think',
+        description:
+            'Answer the planning questions before writing the email.',
+        steps: [
+          LessonStep(
+            id: 'writing_plan_intro',
+            title: 'Think first',
+            prompt: 'Plan your ideas clearly.',
+            type: LessonStepType.info,
+            content: [
+              'Answer each question with a short idea.',
+              'Your teacher can review these answers and give up to 5 points per response.',
+            ],
+          ),
+          LessonStep(
+            id: 'writing_plan_q1',
+            title: 'Plan question 1',
+            prompt: 'What animal do you want as a pet?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer: 'I want a rabbit as a pet.',
+            placeholder: 'Type your answer',
+          ),
+          LessonStep(
+            id: 'writing_plan_q2',
+            title: 'Plan question 2',
+            prompt: 'Why do you want it?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer: 'I want it because it is cute and friendly.',
+            placeholder: 'Type your answer',
+          ),
+          LessonStep(
+            id: 'writing_plan_q3',
+            title: 'Plan question 3',
+            prompt: 'Where will it live?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer: 'It will live in my room.',
+            placeholder: 'Type your answer',
+          ),
+          LessonStep(
+            id: 'writing_plan_q4',
+            title: 'Plan question 4',
+            prompt: 'What will you feed it?',
+            type: LessonStepType.openText,
+            teacherMaxPoints: 5,
+            sampleAnswer: 'I will feed it carrots and fresh grass.',
+            placeholder: 'Type your answer',
+          ),
         ],
-        correctIndex: 0,
       ),
-      QuizQuestion(
-        prompt: 'How do visitors feel?',
-        options: ['Excited', 'Angry', 'Bored', 'Confused'],
-        correctIndex: 0,
-      ),
-      QuizQuestion(
-        prompt: 'Where can people watch the elephants?',
-        options: [
-          'In a special safe area',
-          'Inside the cage',
-          'From a school bus',
-          'From the forest',
+      LessonFolder(
+        id: 'writing_email',
+        title: '2. Write the Email',
+        subtitle: 'Step 2: Write',
+        description:
+            'Write a short email to your mom about your dream pet.',
+        steps: [
+          LessonStep(
+            id: 'writing_email_intro',
+            title: 'Email structure',
+            prompt: 'Use this structure in your writing.',
+            type: LessonStepType.info,
+            content: [
+              'Dear Mom,',
+              'My dream pet is ...',
+              'I want it because ...',
+              'It will live in ...',
+              'I will feed it ...',
+              'I will take care of it.',
+              'Bye,',
+              'Your son/daughter ...',
+            ],
+          ),
+          LessonStep(
+            id: 'writing_email_task',
+            title: 'Writing task',
+            prompt: 'Write your email.',
+            type: LessonStepType.longText,
+            teacherMaxPoints: 5,
+            sampleAnswer:
+                'Dear Mom,\nMy dream pet is a rabbit. I want it because it is cute and friendly. It will live in my room. I will feed it carrots and grass. I will take care of it.\nBye,\nYour daughter Amina',
+            placeholder: 'Write 5-6 sentences',
+          ),
         ],
-        correctIndex: 0,
       ),
-      QuizQuestion(
-        prompt: 'What does the zoo hope these births will help?',
-        options: [
-          'The elephant population',
-          'The weather',
-          'The city traffic',
-          'The school library',
+      LessonFolder(
+        id: 'writing_check',
+        title: '3. Check Your Work',
+        subtitle: 'Step 3: Check',
+        description:
+            'Review the final checklist before you finish the writing lesson.',
+        steps: [
+          LessonStep(
+            id: 'writing_check_list',
+            title: 'Checklist',
+            prompt: 'Tick each item after checking your email.',
+            type: LessonStepType.checklist,
+            checklistItems: [
+              'I used "Dear Mom" and "Bye".',
+              'I wrote 5-6 sentences.',
+              'I used capital letters.',
+              'I checked spelling.',
+            ],
+          ),
         ],
-        correctIndex: 0,
       ),
-      QuizQuestion(
-        prompt: 'What else does the zoo want to teach people about?',
-        options: ['Cooking', 'Wildlife', 'Painting', 'Computers'],
-        correctIndex: 1,
-      ),
-      QuizQuestion(
-        prompt: 'What is the text mainly about?',
-        options: [
-          'A dangerous animal attack',
-          'A zoo trip to the ocean',
-          'Two baby elephants born in a zoo',
-          'How to buy a pet elephant',
+    ],
+  ),
+  LessonContent(
+    id: 'vocabulary',
+    title: 'Vocabulary',
+    subtitle: 'Animal Word Bank',
+    description:
+        'Review key words from the lessons and check the meanings with short activities.',
+    accentColor: 0xFF7B61FF,
+    folders: [
+      LessonFolder(
+        id: 'vocabulary_night_animals',
+        title: '1. Night Animals Words',
+        subtitle: 'Words from the song',
+        description:
+            'Study the words from the listening lesson and match them to the right meanings.',
+        steps: [
+          LessonStep(
+            id: 'vocabulary_night_animals_list',
+            title: 'Word list',
+            prompt: 'Study the vocabulary first.',
+            type: LessonStepType.info,
+            content: [
+              'owl - a bird that hunts at night',
+              'raccoon - a small animal with a dark mask on its face',
+              'wolf - a wild animal from the dog family',
+              'forest - a place with many trees',
+              'night - the dark part of the day',
+              'fly - move through the air',
+              'run - move quickly on foot',
+              'hunt - look for animals to catch',
+              'strong - having a lot of power',
+              'cute - very pretty or sweet',
+            ],
+          ),
+          LessonStep(
+            id: 'vocabulary_night_animals_q1',
+            title: 'Match 1',
+            prompt: 'What is the meaning of "owl"?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'A wild animal from the dog family',
+              'A bird that hunts at night',
+              'A place with many trees',
+            ],
+            correctOptionIndex: 1,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'vocabulary_night_animals_q2',
+            title: 'Match 2',
+            prompt: 'What is the meaning of "wolf"?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'A small animal with a dark mask on its face',
+              'Very pretty or sweet',
+              'A wild animal from the dog family',
+            ],
+            correctOptionIndex: 2,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'vocabulary_night_animals_q3',
+            title: 'Match 3',
+            prompt: 'Complete the meaning: strong = having a lot of ____.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['power'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
         ],
-        correctIndex: 2,
+      ),
+      LessonFolder(
+        id: 'vocabulary_reading_words',
+        title: '2. Zoo Story Words',
+        subtitle: 'Words from the reading text',
+        description:
+            'Review the reading vocabulary and answer quick check questions.',
+        steps: [
+          LessonStep(
+            id: 'vocabulary_reading_words_list',
+            title: 'Word list',
+            prompt: 'Study the vocabulary first.',
+            type: LessonStepType.info,
+            content: [
+              'zoo - a place where animals live for people to see',
+              'elephant - a very large animal with a trunk',
+              'healthy - feeling well and strong',
+              'active - moving a lot and full of energy',
+              'wildlife - animals living in nature',
+              'population - the number of animals or people in one group',
+            ],
+          ),
+          LessonStep(
+            id: 'vocabulary_reading_words_q1',
+            title: 'Match 1',
+            prompt: 'What is the meaning of "elephant"?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'A very large animal with a trunk',
+              'A place where animals live for people to see',
+              'Moving a lot and full of energy',
+            ],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'vocabulary_reading_words_q2',
+            title: 'Match 2',
+            prompt: 'What is the meaning of "wildlife"?',
+            type: LessonStepType.multipleChoice,
+            options: [
+              'Animals living in nature',
+              'The number of animals or people in one group',
+              'Feeling well and strong',
+            ],
+            correctOptionIndex: 0,
+            autoPoints: 1,
+          ),
+          LessonStep(
+            id: 'vocabulary_reading_words_q3',
+            title: 'Match 3',
+            prompt: 'Complete the meaning: active = full of ____.',
+            type: LessonStepType.fillBlank,
+            acceptedAnswers: ['energy'],
+            autoPoints: 1,
+            placeholder: 'Type one word',
+          ),
+        ],
       ),
     ],
   ),

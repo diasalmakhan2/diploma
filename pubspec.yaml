@@ -1,5 +1,5 @@
 name: mobileapp_diploma
-description: Diploma Flutter demo for English learning quizzes.
+description: Folder-based English learning app with teacher review.
 publish_to: "none"
 version: 1.0.0+1
 
@@ -21,4 +21,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/videos/
+    - assets/
