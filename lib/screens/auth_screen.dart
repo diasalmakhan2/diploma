@@ -95,7 +95,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'LinguaLift',
+                              'LinguaNaz',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
