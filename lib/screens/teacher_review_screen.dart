@@ -41,7 +41,9 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
       );
     }
 
-    for (final answer in submission.answers.where((item) => item.requiresTeacherReview)) {
+    final resolvedSubmission = submission;
+
+    for (final answer in resolvedSubmission.answers.where((item) => item.requiresTeacherReview)) {
       _scores.putIfAbsent(answer.stepId, () => answer.teacherAwardedPoints);
     }
 
@@ -65,7 +67,7 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  submission.folderTitle,
+                  resolvedSubmission.folderTitle,
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w900,
@@ -73,7 +75,7 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '${submission.studentName} - ${submission.studentEmail}',
+                  '${resolvedSubmission.studentName} - ${resolvedSubmission.studentEmail}',
                   style: const TextStyle(
                     color: Color(0xFF615D58),
                     fontWeight: FontWeight.w700,
@@ -86,18 +88,18 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
                   children: [
                     _Tag(
                       label:
-                          'Auto ${submission.objectivePoints}/${submission.objectiveMaxPoints}',
+                          'Auto ${resolvedSubmission.objectivePoints}/${resolvedSubmission.objectiveMaxPoints}',
                       color: const Color(0xFF1F7AFC),
                     ),
                     _Tag(
-                      label: 'Teacher $reviewedPoints/${submission.teacherMaxPoints}',
+                      label: 'Teacher $reviewedPoints/${resolvedSubmission.teacherMaxPoints}',
                       color: const Color(0xFFFF8C42),
                     ),
                     _Tag(
-                      label: submission.status == SubmissionStatus.pendingReview
+                      label: resolvedSubmission.status == SubmissionStatus.pendingReview
                           ? 'Pending'
                           : 'Resolved',
-                      color: submission.status == SubmissionStatus.pendingReview
+                      color: resolvedSubmission.status == SubmissionStatus.pendingReview
                           ? const Color(0xFFFF8C42)
                           : const Color(0xFF46C071),
                     ),
@@ -107,7 +109,7 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          ...submission.answers.map(
+          ...resolvedSubmission.answers.map(
             (answer) => Padding(
               padding: const EdgeInsets.only(bottom: 12),
               child: Container(
@@ -198,7 +200,7 @@ class _TeacherReviewScreenState extends State<TeacherReviewScreen> {
                       _saving = true;
                     });
                     await appState.reviewSubmission(
-                      submissionId: submission.id,
+                      submissionId: resolvedSubmission.id,
                       teacherScores: _scores,
                     );
                     if (!context.mounted) {

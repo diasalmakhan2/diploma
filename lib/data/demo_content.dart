@@ -19,7 +19,7 @@ const lessons = <LessonContent>[
           type: LessonMediaType.audio,
           title: 'Night Animals Song',
           description: 'Play the song before or during the activities.',
-          assetPath: 'assets/audio/night_animals_song.mp3',
+          assetPath: 'assets/audio/night_animals_song.mp4',
           emptyStateText: 'The song is not available yet.',
         ),
         steps: [
@@ -123,7 +123,7 @@ const lessons = <LessonContent>[
           type: LessonMediaType.audio,
           title: 'Night Animals Song',
           description: 'Use the song again while completing the lyrics.',
-          assetPath: 'assets/audio/night_animals_song.mp3',
+          assetPath: 'assets/audio/night_animals_song.mp4',
           emptyStateText: 'The song is not available yet.',
         ),
         steps: [
