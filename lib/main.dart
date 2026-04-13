@@ -23,7 +23,7 @@ class LinguaLiftApp extends StatelessWidget {
     return AppScope(
       state: appState,
       child: MaterialApp(
-        title: 'LinguaLift',
+        title: 'LinguaNaz',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.build(),
         home: appState.isLoggedIn ? const HomeShell() : const AuthScreen(),
