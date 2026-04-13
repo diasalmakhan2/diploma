@@ -265,6 +265,71 @@ class _StepCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget answerInput;
+    if (step.type == LessonStepType.info) {
+      answerInput = const SizedBox.shrink();
+    } else if (step.type == LessonStepType.multipleChoice) {
+      answerInput = Column(
+        children: List.generate(step.options.length, (index) {
+          final selected = selectedOptionIndex == index;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () => onSelectOption(index),
+              child: Ink(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: selected ? accent.withOpacity(0.12) : Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: selected ? accent : const Color(0xFFE8E2DA),
+                    width: 2,
+                  ),
+                ),
+                child: Text(
+                  step.options[index],
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: selected ? accent : const Color(0xFF2F2A26),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
+      );
+    } else if (step.type == LessonStepType.fillBlank ||
+        step.type == LessonStepType.openText ||
+        step.type == LessonStepType.longText) {
+      answerInput = TextField(
+        controller: textController,
+        onChanged: onTextChanged,
+        maxLines: step.type == LessonStepType.longText ? 8 : 4,
+        decoration: InputDecoration(
+          hintText: step.placeholder ?? 'Type your answer',
+          alignLabelWithHint: true,
+        ),
+      );
+    } else {
+      answerInput = Column(
+        children: step.checklistItems
+            .map(
+              (item) => CheckboxListTile(
+                value: checkedItems.contains(item),
+                onChanged: (value) => onToggleChecklist(item, value ?? false),
+                title: Text(
+                  item,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+                contentPadding: EdgeInsets.zero,
+                controlAffinity: ListTileControlAffinity.leading,
+              ),
+            )
+            .toList(),
+      );
+    }
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -375,64 +440,7 @@ class _StepCard extends StatelessWidget {
             ),
           ],
           const SizedBox(height: 18),
-          switch (step.type) {
-            LessonStepType.info => const SizedBox.shrink(),
-            LessonStepType.multipleChoice => Column(
-              children: List.generate(step.options.length, (index) {
-                final selected = selectedOptionIndex == index;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: () => onSelectOption(index),
-                    child: Ink(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: selected ? accent.withOpacity(0.12) : Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: selected ? accent : const Color(0xFFE8E2DA),
-                          width: 2,
-                        ),
-                      ),
-                      child: Text(
-                        step.options[index],
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: selected ? accent : const Color(0xFF2F2A26),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
-            ),
-            LessonStepType.fillBlank || LessonStepType.openText || LessonStepType.longText => TextField(
-              controller: textController,
-              onChanged: onTextChanged,
-              maxLines: step.type == LessonStepType.longText ? 8 : 4,
-              decoration: InputDecoration(
-                hintText: step.placeholder ?? 'Type your answer',
-                alignLabelWithHint: true,
-              ),
-            ),
-            LessonStepType.checklist => Column(
-              children: step.checklistItems
-                  .map(
-                    (item) => CheckboxListTile(
-                      value: checkedItems.contains(item),
-                      onChanged: (value) => onToggleChecklist(item, value ?? false),
-                      title: Text(
-                        item,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      contentPadding: EdgeInsets.zero,
-                      controlAffinity: ListTileControlAffinity.leading,
-                    ),
-                  )
-                  .toList(),
-            ),
-          },
+          answerInput,
         ],
       ),
     );

@@ -100,7 +100,8 @@ class _FolderCard extends StatelessWidget {
     final appState = AppScope.of(context);
     final submission = appState.submissionForFolder(lesson.id, folder.id);
     final accent = Color(lesson.accentColor);
-    final status = _statusLabel(submission);
+    final statusLabel = _statusLabel(submission);
+    final statusColor = _statusColor(submission);
 
     return InkWell(
       borderRadius: BorderRadius.circular(28),
@@ -135,7 +136,7 @@ class _FolderCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                _StatusChip(label: status.$1, color: status.$2),
+                _StatusChip(label: statusLabel, color: statusColor),
               ],
             ),
             const SizedBox(height: 8),
@@ -180,14 +181,24 @@ class _FolderCard extends StatelessWidget {
     );
   }
 
-  (String, Color) _statusLabel(FolderSubmission? submission) {
+  String _statusLabel(FolderSubmission? submission) {
     if (submission == null) {
-      return ('Ready', const Color(0xFF1F7AFC));
+      return 'Ready';
     }
     if (submission.status == SubmissionStatus.pendingReview) {
-      return ('Pending Review', const Color(0xFFFF8C42));
+      return 'Pending Review';
     }
-    return ('Resolved', const Color(0xFF46C071));
+    return 'Resolved';
+  }
+
+  Color _statusColor(FolderSubmission? submission) {
+    if (submission == null) {
+      return const Color(0xFF1F7AFC);
+    }
+    if (submission.status == SubmissionStatus.pendingReview) {
+      return const Color(0xFFFF8C42);
+    }
+    return const Color(0xFF46C071);
   }
 }
 

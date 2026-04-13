@@ -286,7 +286,7 @@ class AppState extends ChangeNotifier {
       }
 
       final requestedScore = teacherScores[answer.stepId] ?? answer.teacherAwardedPoints;
-      final boundedScore = requestedScore.clamp(0, answer.teacherMaxPoints);
+      final boundedScore = requestedScore.clamp(0, answer.teacherMaxPoints).toInt();
       return answer.copyWith(teacherAwardedPoints: boundedScore);
     }).toList();
 
