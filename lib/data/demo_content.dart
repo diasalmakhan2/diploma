@@ -20,8 +20,7 @@ const lessons = <LessonContent>[
           title: 'Night Animals Song',
           description: 'Play the song before or during the activities.',
           assetPath: 'assets/audio/night_animals_song.mp3',
-          emptyStateText:
-              'Add the song file to assets/audio/night_animals_song.mp3 to enable playback.',
+          emptyStateText: 'The song is not available yet.',
         ),
         steps: [
           LessonStep(
@@ -125,8 +124,7 @@ const lessons = <LessonContent>[
           title: 'Night Animals Song',
           description: 'Use the song again while completing the lyrics.',
           assetPath: 'assets/audio/night_animals_song.mp3',
-          emptyStateText:
-              'Add the song file to assets/audio/night_animals_song.mp3 to enable playback.',
+          emptyStateText: 'The song is not available yet.',
         ),
         steps: [
           LessonStep(
@@ -289,8 +287,7 @@ const lessons = <LessonContent>[
           title: 'Picture prompt',
           description: 'A little girl is feeding baby elephants.',
           assetPath: 'assets/images/baby_elephants.jpg',
-          emptyStateText:
-              'Add the picture to assets/images/baby_elephants.jpg to display the reading prompt.',
+          emptyStateText: 'The picture is not available yet.',
         ),
         steps: [
           LessonStep(
@@ -443,25 +440,35 @@ const lessons = <LessonContent>[
     accentColor: 0xFFFF8C42,
     folders: [
       LessonFolder(
-        id: 'writing_plan',
-        title: '1. Plan Your Ideas',
-        subtitle: 'Step 1: Think',
-        description:
-            'Answer the planning questions before writing the email.',
+        id: 'writing_email_task',
+        title: '1. Writing Task: My Dream Pet (Email)',
+        subtitle: 'Plan, write, and check',
+        description: 'Write an email to your mom about your dream pet.',
         steps: [
           LessonStep(
-            id: 'writing_plan_intro',
-            title: 'Think first',
-            prompt: 'Plan your ideas clearly.',
+            id: 'writing_intro',
+            title: 'Task',
+            prompt: 'Write an email to your mom about your dream pet.',
             type: LessonStepType.info,
             content: [
-              'Answer each question with a short idea.',
-              'Your teacher can review these answers and give up to 5 points per response.',
+              'Follow the steps: think, write, and check.',
             ],
           ),
           LessonStep(
-            id: 'writing_plan_q1',
-            title: 'Plan question 1',
+            id: 'writing_think_intro',
+            title: 'Step 1: Think',
+            prompt: 'Answer the questions before writing.',
+            type: LessonStepType.info,
+            content: [
+              'What animal do you want as a pet?',
+              'Why do you want it?',
+              'Where will it live? (home / room / garden)',
+              'What will you feed it?',
+            ],
+          ),
+          LessonStep(
+            id: 'writing_q1',
+            title: 'Think question 1',
             prompt: 'What animal do you want as a pet?',
             type: LessonStepType.openText,
             teacherMaxPoints: 5,
@@ -469,8 +476,8 @@ const lessons = <LessonContent>[
             placeholder: 'Type your answer',
           ),
           LessonStep(
-            id: 'writing_plan_q2',
-            title: 'Plan question 2',
+            id: 'writing_q2',
+            title: 'Think question 2',
             prompt: 'Why do you want it?',
             type: LessonStepType.openText,
             teacherMaxPoints: 5,
@@ -478,8 +485,8 @@ const lessons = <LessonContent>[
             placeholder: 'Type your answer',
           ),
           LessonStep(
-            id: 'writing_plan_q3',
-            title: 'Plan question 3',
+            id: 'writing_q3',
+            title: 'Think question 3',
             prompt: 'Where will it live?',
             type: LessonStepType.openText,
             teacherMaxPoints: 5,
@@ -487,27 +494,18 @@ const lessons = <LessonContent>[
             placeholder: 'Type your answer',
           ),
           LessonStep(
-            id: 'writing_plan_q4',
-            title: 'Plan question 4',
+            id: 'writing_q4',
+            title: 'Think question 4',
             prompt: 'What will you feed it?',
             type: LessonStepType.openText,
             teacherMaxPoints: 5,
             sampleAnswer: 'I will feed it carrots and fresh grass.',
             placeholder: 'Type your answer',
           ),
-        ],
-      ),
-      LessonFolder(
-        id: 'writing_email',
-        title: '2. Write the Email',
-        subtitle: 'Step 2: Write',
-        description:
-            'Write a short email to your mom about your dream pet.',
-        steps: [
           LessonStep(
-            id: 'writing_email_intro',
-            title: 'Email structure',
-            prompt: 'Use this structure in your writing.',
+            id: 'writing_structure',
+            title: 'Step 2: Write',
+            prompt: 'Use this structure.',
             type: LessonStepType.info,
             content: [
               'Dear Mom,',
@@ -521,7 +519,7 @@ const lessons = <LessonContent>[
             ],
           ),
           LessonStep(
-            id: 'writing_email_task',
+            id: 'writing_email_body',
             title: 'Writing task',
             prompt: 'Write your email.',
             type: LessonStepType.longText,
@@ -530,18 +528,18 @@ const lessons = <LessonContent>[
                 'Dear Mom,\nMy dream pet is a rabbit. I want it because it is cute and friendly. It will live in my room. I will feed it carrots and grass. I will take care of it.\nBye,\nYour daughter Amina',
             placeholder: 'Write 5-6 sentences',
           ),
-        ],
-      ),
-      LessonFolder(
-        id: 'writing_check',
-        title: '3. Check Your Work',
-        subtitle: 'Step 3: Check',
-        description:
-            'Review the final checklist before you finish the writing lesson.',
-        steps: [
+          LessonStep(
+            id: 'writing_check_intro',
+            title: 'Step 3: Check',
+            prompt: 'Check your work before you submit.',
+            type: LessonStepType.info,
+            content: [
+              'Use the checklist on the next page.',
+            ],
+          ),
           LessonStep(
             id: 'writing_check_list',
-            title: 'Checklist',
+            title: 'Final checklist',
             prompt: 'Tick each item after checking your email.',
             type: LessonStepType.checklist,
             checklistItems: [
@@ -558,128 +556,45 @@ const lessons = <LessonContent>[
   LessonContent(
     id: 'vocabulary',
     title: 'Vocabulary',
-    subtitle: 'Animal Word Bank',
+    subtitle: 'Word List',
     description:
-        'Review key words from the lessons and check the meanings with short activities.',
+        'Study the words and their translations.',
     accentColor: 0xFF7B61FF,
     folders: [
       LessonFolder(
-        id: 'vocabulary_night_animals',
-        title: '1. Night Animals Words',
-        subtitle: 'Words from the song',
-        description:
-            'Study the words from the listening lesson and match them to the right meanings.',
+        id: 'vocabulary_list',
+        title: '1. Vocabulary List',
+        subtitle: 'Words and translations',
+        description: 'Review the vocabulary from the lesson.',
         steps: [
           LessonStep(
-            id: 'vocabulary_night_animals_list',
-            title: 'Word list',
-            prompt: 'Study the vocabulary first.',
+            id: 'vocabulary_intro',
+            title: 'Vocabulary',
+            prompt: 'Study the words and translations.',
             type: LessonStepType.info,
             content: [
-              'owl - a bird that hunts at night',
-              'raccoon - a small animal with a dark mask on its face',
-              'wolf - a wild animal from the dog family',
-              'forest - a place with many trees',
-              'night - the dark part of the day',
-              'fly - move through the air',
-              'run - move quickly on foot',
-              'hunt - look for animals to catch',
-              'strong - having a lot of power',
-              'cute - very pretty or sweet',
+              'owl - сова',
+              'raccoon - енот',
+              'wolf - волк',
+              'forest - лес',
+              'night - ночь',
+              'fly - летать',
+              'run - бегать',
+              'hunt - охотиться',
+              'strong - сильный',
+              'cute - милый',
             ],
           ),
           LessonStep(
-            id: 'vocabulary_night_animals_q1',
-            title: 'Match 1',
-            prompt: 'What is the meaning of "owl"?',
-            type: LessonStepType.multipleChoice,
-            options: [
-              'A wild animal from the dog family',
-              'A bird that hunts at night',
-              'A place with many trees',
-            ],
-            correctOptionIndex: 1,
-            autoPoints: 1,
-          ),
-          LessonStep(
-            id: 'vocabulary_night_animals_q2',
-            title: 'Match 2',
-            prompt: 'What is the meaning of "wolf"?',
-            type: LessonStepType.multipleChoice,
-            options: [
-              'A small animal with a dark mask on its face',
-              'Very pretty or sweet',
-              'A wild animal from the dog family',
-            ],
-            correctOptionIndex: 2,
-            autoPoints: 1,
-          ),
-          LessonStep(
-            id: 'vocabulary_night_animals_q3',
-            title: 'Match 3',
-            prompt: 'Complete the meaning: strong = having a lot of ____.',
-            type: LessonStepType.fillBlank,
-            acceptedAnswers: ['power'],
-            autoPoints: 1,
-            placeholder: 'Type one word',
-          ),
-        ],
-      ),
-      LessonFolder(
-        id: 'vocabulary_reading_words',
-        title: '2. Zoo Story Words',
-        subtitle: 'Words from the reading text',
-        description:
-            'Review the reading vocabulary and answer quick check questions.',
-        steps: [
-          LessonStep(
-            id: 'vocabulary_reading_words_list',
-            title: 'Word list',
-            prompt: 'Study the vocabulary first.',
+            id: 'vocabulary_note',
+            title: 'Remember',
+            prompt: 'Use these words in your tasks.',
             type: LessonStepType.info,
             content: [
-              'zoo - a place where animals live for people to see',
-              'elephant - a very large animal with a trunk',
-              'healthy - feeling well and strong',
-              'active - moving a lot and full of energy',
-              'wildlife - animals living in nature',
-              'population - the number of animals or people in one group',
+              'This folder is only for study.',
+              'There are no quiz questions here.',
+              'Read the list and practise the words aloud.',
             ],
-          ),
-          LessonStep(
-            id: 'vocabulary_reading_words_q1',
-            title: 'Match 1',
-            prompt: 'What is the meaning of "elephant"?',
-            type: LessonStepType.multipleChoice,
-            options: [
-              'A very large animal with a trunk',
-              'A place where animals live for people to see',
-              'Moving a lot and full of energy',
-            ],
-            correctOptionIndex: 0,
-            autoPoints: 1,
-          ),
-          LessonStep(
-            id: 'vocabulary_reading_words_q2',
-            title: 'Match 2',
-            prompt: 'What is the meaning of "wildlife"?',
-            type: LessonStepType.multipleChoice,
-            options: [
-              'Animals living in nature',
-              'The number of animals or people in one group',
-              'Feeling well and strong',
-            ],
-            correctOptionIndex: 0,
-            autoPoints: 1,
-          ),
-          LessonStep(
-            id: 'vocabulary_reading_words_q3',
-            title: 'Match 3',
-            prompt: 'Complete the meaning: active = full of ____.',
-            type: LessonStepType.fillBlank,
-            acceptedAnswers: ['energy'],
-            autoPoints: 1,
-            placeholder: 'Type one word',
           ),
         ],
       ),
