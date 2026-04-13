@@ -51,7 +51,7 @@ class AppTheme {
           height: 1.45,
         ),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: Colors.white,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -70,8 +70,8 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
         indicatorColor: mint.withOpacity(0.16),
-        labelTextStyle: const MaterialStatePropertyAll(
-          const TextStyle(fontWeight: FontWeight.w700),
+        labelTextStyle: const WidgetStatePropertyAll(
+          TextStyle(fontWeight: FontWeight.w700),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
