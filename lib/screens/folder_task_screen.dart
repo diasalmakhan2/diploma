@@ -272,27 +272,59 @@ class _StepCard extends StatelessWidget {
       answerInput = Column(
         children: List.generate(step.options.length, (index) {
           final selected = selectedOptionIndex == index;
+          final optionLabel = String.fromCharCode(65 + index);
           return Padding(
-            padding: const EdgeInsets.only(bottom: 12),
+            padding: const EdgeInsets.only(bottom: 10),
             child: InkWell(
               borderRadius: BorderRadius.circular(20),
               onTap: () => onSelectOption(index),
               child: Ink(
-                padding: const EdgeInsets.all(16),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                 decoration: BoxDecoration(
-                  color: selected ? accent.withOpacity(0.12) : Colors.white,
+                  color: selected ? accent.withOpacity(0.10) : const Color(0xFFFFFCF7),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: selected ? accent : const Color(0xFFE8E2DA),
+                    color: selected ? accent : const Color(0xFFE7DED3),
                     width: 2,
                   ),
                 ),
-                child: Text(
-                  step.options[index],
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: selected ? accent : const Color(0xFF2F2A26),
-                  ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 34,
+                      height: 34,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: selected ? accent : const Color(0xFFF2EADF),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        optionLabel,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: selected ? Colors.white : const Color(0xFF6F655C),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Text(
+                          step.options[index],
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: selected ? accent : const Color(0xFF2F2A26),
+                            height: 1.25,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
