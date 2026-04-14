@@ -1,11 +1,11 @@
 {
-    "name": "mobileapp_diploma",
-    "short_name": "mobileapp_diploma",
+    "name": "LinguaNaz",
+    "short_name": "LinguaNaz",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "LinguaNaz English learning app.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
